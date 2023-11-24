@@ -17,13 +17,17 @@ setTimeout(() => {
 // working with promises
 const myPromise = (dataPoint) => {
   return new Promise((resolve, reject) => {
-    if (successfull) {
+    let age = 78;
+    if (age > 29) {
+      console.log("Ready to buy land");
       resolve();
-    } else if (unsuccessful) {
+    } else if (age < 29) {
+      console.log("Time no yet");
       reject();
     }
   });
 };
+myPromise();
 
 //working with async await
 const asyncFunc = async () => {
