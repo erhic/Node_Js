@@ -7,5 +7,16 @@ const fs = require("fs");
 //   }
 // );
 
-let products = fs.readFileSync("./products.txt", "utf-8");
-console.log(products);
+// synchronous
+// fs.readFileSync("./products.txt", "utf-8");
+// console.log(products);
+
+//asynchronous
+let products = fs.readFile("./products.txt", "utf-8", (err, data) => {
+  console.log(err);
+  console.log(data);
+});
+
+fs.appendFile("./products.txt", "\n all items above are in stock", (err) => {
+  console.log(err);
+});
