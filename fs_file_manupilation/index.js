@@ -20,3 +20,9 @@ let products = fs.readFile("./products.txt", "utf-8", (err, data) => {
 fs.appendFile("./products.txt", "\n all items above are in stock", (err) => {
   console.log(err);
 });
+
+const os = require("os");
+
+console.log(os.hostname());
+console.log(os.platform());
+console.log(os.freemem());
