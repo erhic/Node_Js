@@ -4,12 +4,15 @@ async function getAgeStatus() {
   // this is a promise but sychronous
   const promis = new Promise(function (reject, resolve) {
     let age = " 30";
-    if (age >= 30) {
-      console.log("Age is above");
+    if (age >= 30 || age === 30) {
+      resolve(`Age is ${age} years`);
     } else {
-      console.log("Too young");
+      reject("Too young");
     }
   });
+  return promis;
 }
 
-getAgeStatus();
+getAgeStatus()
+  .then((data) => console.log(data))
+  .catch((err) => console.log(err));
