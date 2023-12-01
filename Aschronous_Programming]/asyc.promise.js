@@ -18,6 +18,8 @@ getAgeStatus()
   .catch((err) => console.log(err));
 console.log("............");
 
+//getting data from Api using fetch which return a promise , Asynchronous function
+
 fetch("https://www.boredapi.com/api/activity")
   .then((data) => {
     console.log(data.status);
@@ -27,3 +29,15 @@ fetch("https://www.boredapi.com/api/activity")
     console.log(rs);
   })
   .catch((err) => console.log(err));
+
+// getting data using async and await to make asynchronous function , using try ..catch to handle errors
+
+async function myCart() {
+  let products = await fetch(
+    "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
+  );
+  let prodData = await products.json();
+  console.log(prodData);
+  console.log("...\\\\\\//////......");
+}
+myCart();
