@@ -21,12 +21,9 @@ console.log("............");
 fetch("https://www.boredapi.com/api/activity")
   .then((data) => {
     console.log(data.status);
-    data
-      .json()
-
-      .then((rs) => {
-        console.log(rs);
-      })
-      .catch((err) => console.log(err));
+    return data.json();
+  })
+  .then((rs) => {
+    console.log(rs);
   })
   .catch((err) => console.log(err));
