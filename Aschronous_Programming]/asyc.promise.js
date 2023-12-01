@@ -33,11 +33,16 @@ fetch("https://www.boredapi.com/api/activity")
 // getting data using async and await to make asynchronous function , using try ..catch to handle errors
 
 async function myCart() {
-  let products = await fetch(
-    "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
-  );
-  let prodData = await products.json();
-  console.log(prodData);
-  console.log("...\\\\\\//////......");
+  // use try .. catch to handle error
+  try {
+    let products = await fetch(
+      "https://datausa.io/ap/data?drilldowns=Nation&measures=Population"
+    );
+    let prodData = await products.json();
+    console.log(prodData);
+    console.log("...\\\\\\//////......");
+  } catch (err) {
+    console.log(err);
+  }
 }
 myCart();
