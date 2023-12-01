@@ -16,3 +16,17 @@ async function getAgeStatus() {
 getAgeStatus()
   .then((data) => console.log(data))
   .catch((err) => console.log(err));
+console.log("............");
+
+fetch("https://www.boredapi.com/api/activity")
+  .then((data) => {
+    console.log(data.status);
+    data
+      .json()
+
+      .then((rs) => {
+        console.log(rs);
+      })
+      .catch((err) => console.log(err));
+  })
+  .catch((err) => console.log(err));
