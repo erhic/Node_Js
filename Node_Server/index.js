@@ -2,7 +2,7 @@
 const http = require("http");
 const { url } = require("inspector");
 
-// creating API SERVER
+// creating API SERVER using a create server function
 http
   .createServer((req, res) => {
     console.log(res.end("end of the exuuuuuution"));
@@ -12,4 +12,4 @@ http
       res.end("update data");
     }
   })
-  .liste(3000);
+  .listen(3000);
