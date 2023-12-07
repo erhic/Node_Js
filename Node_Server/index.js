@@ -2,7 +2,7 @@
 const http = require("http");
 const { url } = require("inspector");
 
-// creating API SERVER using a create server function
+// creating API SERVER using a create server function with async function
 http
   .createServer((req, res) => {
     console.log(res.end("end of the exuuuuuution"));
