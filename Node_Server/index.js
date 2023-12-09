@@ -1,4 +1,4 @@
-// Importing HTTP Modules from node .
+// Importing HTTP Modules from node, an internal module from Node  .
 const http = require("http");
 const { url } = require("inspector");
 
