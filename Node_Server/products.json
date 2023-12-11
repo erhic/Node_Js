@@ -1,0 +1,26 @@
+[
+  {
+    "id":1,
+    "name":"milk",
+    "origin":"kiambu",
+    "brand":"fresha"
+  },
+  {
+    "id":1,
+    "name":"sugar",
+    "origin":"Western",
+    "brand":"Mumias"
+  },
+  {
+    "id":1,
+    "name":"milk",
+    "origin":"Nyeri",
+    "brand":"Tuzo"
+  },
+  {
+    "id":4,
+    "name":"milk",
+    "origin":"Nyandarua",
+    "brand":"Molo"
+  }
+]
