@@ -16,8 +16,6 @@ http
   .createServer((req, res) => {
     if (req.url === "/add" && req.method == "POST") {
       res.end("Added product");
-    } else if (req.url === "/user" && req.method == "POST") {
-      res.end("Added  users");
     } else if (req.url === "/users" && req.method == "GET") {
       fs.readFile("./products.json", "utf-8", (err, data) => {
         if (err == null) {
