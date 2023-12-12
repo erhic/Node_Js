@@ -14,11 +14,16 @@ const url = require("url");
 
 http
   .createServer((req, res) => {
-    console.log(req.url);
     console.log(url.parse(req.url, true));
-    let urlParam = url.parse(req.url, true);
     console.log(".......");
+
+    //getting rid and transforning url to use it get data using url module
+    let urlParam = url.parse(req.url, true);
+
+    //reading file synchronously
     let myProducts = fs.readFileSync("./products.json", "utf-8");
+
+    //fetching all the products
     if (
       urlParam.pathname == "/products" &&
       req.method == "GET" &&
@@ -27,32 +32,51 @@ http
       console.log(typeof myProducts);
       res.end(myProducts);
     } else if (
+      //fetching a single product ,using query parameter
       urlParam.pathname == "/products" &&
       req.method == "GET" &&
       urlParam.query.id != undefined
     ) {
+      //transforming the read file string data to object
       let prodArray = JSON.parse(myProducts);
+      // using find array method to find the id matching that in query
       let fProduct = prodArray.find((produc) => {
         return produc.id == urlParam.query.id;
       });
       console.log(fProduct);
+      // changing the found object into a string and if none found ,send a message
       if (fProduct != undefined) {
-        // can't send product as a object and validate if query isnt there
         res.end(JSON.stringify(fProduct));
       } else {
         res.end(JSON.stringify({ message: "Product not found" }));
       }
+
+      //adding a product
+    } else if (urlParam.pathname == "/products" && req.method == "POST") {
+      //setting a variable to hold the stream /chunk
+      let prd = "";
+      //data output here is binary, we are adding chunk here
+      req.on("data", (chunk) => {
+        prd = prd + chunk;
+      });
+
+      //data output here is string
+      req.on("end", () => {
+        //we read the file ,make it object and add our streamed data here and then transform the data again to string
+
+        let fileAsArray = JSON.parse(myProducts);
+        let prdAsArrayObj = JSON.parse(prd);
+
+        //adding a product as an objects in the file list of objects(array)
+        fileAsArray.push(prdAsArrayObj);
+
+        //updating the file by writing it , together with converting data to string and catching error and string message if product added successfully
+        fs.writeFile("./product", JSON.stringify(fileAsArray), (err) => {
+          if (err == null) {
+            res.end(JSON.stringify({ message: "New file added successfuly" }));
+          }
+        });
+      });
     }
-    // if (req.url === "/add" && req.method == "POST") {
-    //   res.end("Added product");
-    // } else if (req.url === "/users" && req.method == "GET") {
-    //   fs.readFile("./products.json", "utf-8", (err, data) => {
-    //     if (err == null) {
-    //       res.end(data);
-    //     } else {
-    //       res.end("data error, cant acccess data ", err);
-    //     }
-    //   });
-    // }
   })
   .listen(3020);
