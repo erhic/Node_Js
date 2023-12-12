@@ -21,7 +21,7 @@ http
     let urlParam = url.parse(req.url, true);
 
     //reading file synchronously
-    let myProducts = fs.readFileSync("./products.json", "utf-8");
+    let myProducts = fs.readFileSync("./product.json", "utf-8");
 
     //fetching all the products
     if (
@@ -54,10 +54,10 @@ http
       //adding a product
     } else if (urlParam.pathname == "/products" && req.method == "POST") {
       //setting a variable to hold the stream /chunk
-      let prd = "";
+      let prdct = "";
       //data output here is binary, we are adding chunk here
       req.on("data", (chunk) => {
-        prd = prd + chunk;
+        prdct = prdct + chunk;
       });
 
       //data output here is string
@@ -65,13 +65,13 @@ http
         //we read the file ,make it object and add our streamed data here and then transform the data again to string
 
         let fileAsArray = JSON.parse(myProducts);
-        let prdAsArrayObj = JSON.parse(prd);
+        let prdAsArrayObj = JSON.parse(prdct);
 
         //adding a product as an objects in the file list of objects(array)
         fileAsArray.push(prdAsArrayObj);
 
         //updating the file by writing it , together with converting data to string and catching error and string message if product added successfully
-        fs.writeFile("./product", JSON.stringify(fileAsArray), (err) => {
+        fs.writeFile("./product.json", JSON.stringify(fileAsArray), (err) => {
           if (err == null) {
             res.end(JSON.stringify({ message: "New file added successfuly" }));
           }
