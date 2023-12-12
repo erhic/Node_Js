@@ -36,7 +36,12 @@ http
         return produc.id == urlParam.query.id;
       });
       console.log(fProduct);
-      res.end();
+      if (fProduct != undefined) {
+        // can't send product as a object and validate if query isnt there
+        res.end(JSON.stringify(fProduct));
+      } else {
+        res.end(JSON.stringify({ message: "Product not found" }));
+      }
     }
     // if (req.url === "/add" && req.method == "POST") {
     //   res.end("Added product");
