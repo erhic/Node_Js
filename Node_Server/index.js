@@ -118,7 +118,7 @@ http
       });
 
       // implement the logic here ,convert string data to object and vice-versa, use callbeck which is called when stream data is done
-      res.on("end", () => {
+      req.on("end", () => {
         //transform  data to object to be able to add logic using JS language.
         let productsFile = JSON.parse(myProducts);
         let prodChnk = JSON.parse(prod);
@@ -126,13 +126,14 @@ http
         let indexPst = productsFile.findIndex((prdc) => {
           return prdc.id == urlParam.query.id;
         });
+
         if (indexPst !== -1) {
           productsFile[indexPst] = prodChnk;
           fs.writeFile(
             "./product.json",
             JSON.stringify(productsFile),
             (err) => {
-              if (err !== null) {
+              if (err == null) {
                 res.end(
                   JSON.stringify({ message: "Product updated succesfully" })
                 );
@@ -142,9 +143,11 @@ http
             }
           );
         } else {
-          res.end({ message: "Product to update doesn't exist" });
+          res.end(
+            JSON.stringify({ message: "Product to update doesn't exist" })
+          );
         }
       });
     }
   })
-  .listen(3021);
+  .listen(3022);
