@@ -122,6 +122,28 @@ http
         //transform  data to object to be able to add logic using JS language.
         let productsFile = JSON.parse(myProducts);
         let prodChnk = JSON.parse(prod);
+
+        let indexPst = productsFile.findIndex((prdc) => {
+          return prdc.id == urlParam.query.id;
+        });
+        if (indexPst !== -1) {
+          productsFile[indexPst] = prodChnk;
+          fs.writeFile(
+            "./product.json",
+            JSON.stringify(productsFile),
+            (err) => {
+              if (err !== null) {
+                res.end(
+                  JSON.stringify({ message: "Product updated succesfully" })
+                );
+              } else {
+                res.end({ message: "Problem updating product" });
+              }
+            }
+          );
+        } else {
+          res.end({ message: "Product to update doesn't exist" });
+        }
       });
     }
   })
