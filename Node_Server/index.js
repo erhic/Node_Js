@@ -121,6 +121,7 @@ http
       res.on("end", () => {
         //transform  data to object to be able to add logic using JS language.
         let productsFile = JSON.parse(myProducts);
+        let prodChnk = JSON.parse(prod);
       });
     }
   })
