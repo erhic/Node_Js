@@ -53,11 +53,12 @@ http
 
       //adding a product
     } else if (urlParam.pathname == "/products" && req.method == "POST") {
+      console.log(req.method);
       //setting a variable to hold the stream /chunk
       let prdct = "";
       //data output here is binary, we are adding chunk here
       req.on("data", (chunk) => {
-        prdct = prdct + chunk;
+        prdct += chunk;
       });
 
       //data output here is string
@@ -74,9 +75,38 @@ http
         fs.writeFile("./product.json", JSON.stringify(fileAsArray), (err) => {
           if (err == null) {
             res.end(JSON.stringify({ message: "New file added successfuly" }));
+          } else {
+            res.end(JSON.stringify({ message: "Problem while adding data" }));
           }
         });
       });
     }
+
+    //delete a file
+    else if (req.method == "DELETE" && urlParam.pathname == "/products") {
+      //changing string files in an array
+      let fileArrayfrmStr = JSON.parse(myProducts);
+
+      let index = fileArrayfrmStr.findIndex((prod) => {
+        return prod.id == urlParam.query.id;
+      });
+      console.log(index);
+      if (index !== -1) {
+        fileArrayfrmStr.splice(index, 1);
+        fs.writeFile(
+          "./product.json",
+          JSON.stringify(fileArrayfrmStr),
+          (err) => {
+            if (err == null) {
+              res.end(JSON.stringify({ message: "File Deleted successfully" }));
+            } else {
+              res.end(JSON.stringify({ message: "Error while deleting file" }));
+            }
+          }
+        );
+      } else {
+        res.end(JSON.stringify({ message: "Product to delete not found" }));
+      }
+    }
   })
-  .listen(3020);
+  .listen(3021);
