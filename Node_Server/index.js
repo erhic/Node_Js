@@ -108,5 +108,17 @@ http
         res.end(JSON.stringify({ message: "Product to delete not found" }));
       }
     }
+    //updating data
+    else if ((req.method == "PUT", urlParam.pathname == "/products")) {
+      let prod = "";
+
+      // recording , storing data streams
+      req.on("data", (chunk) => {
+        prod += chunk;
+      });
+
+      // implement the logic here ,convert string data to object and vice-versa
+      res.on("end");
+    }
   })
   .listen(3021);
