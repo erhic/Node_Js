@@ -117,8 +117,11 @@ http
         prod += chunk;
       });
 
-      // implement the logic here ,convert string data to object and vice-versa
-      res.on("end");
+      // implement the logic here ,convert string data to object and vice-versa, use callbeck which is called when stream data is done
+      res.on("end", () => {
+        //transform  data to object to be able to add logic using JS language.
+        let productsFile = JSON.parse(myProducts);
+      });
     }
   })
   .listen(3021);
