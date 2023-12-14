@@ -54,23 +54,33 @@ let product = {
 //   });
 
 //2. fetching data ,using find method
-prodModel
-  .find({ name: "Milk" })
-  .sort({ quantity: -1 })
-  .limit(1)
-  .then((data) => {
-    console.log(data);
-    console.log("data fetched succesfully");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// prodModel
+//   .find({ name: "Milk" })
+//   .sort({ quantity: -1 })
+//   .limit(1)
+//   .then((data) => {
+//     console.log(data);
+//     console.log("data fetched succesfully");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
+// prodModel
+//   .deleteOne({ name: "honey" })
+//   .then((info) => {
+//     console.log(info);
+//     console.log("Record deleted successfully");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+
+//updating a  resource , can update one or many
 prodModel
-  .deleteOne({ name: "hone" })
-  .then((data) => {
-    console.log(data);
-    console.log("Record deleted successfully");
+  .updateMany({ name: "yought" }, { quantity: 40 })
+  .then((info) => {
+    console.log(info);
   })
   .catch((err) => {
     console.log(err);
