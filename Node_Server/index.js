@@ -17,6 +17,14 @@ http
     console.log(url.parse(req.url, true));
     console.log(".......");
 
+    // added cors header to authorize work with diffrent servers
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,PUT,POST,DELETE,OPTIONS"
+    );
+
     //getting rid and transforning url to use it get data using url module
     let urlParam = url.parse(req.url, true);
 
