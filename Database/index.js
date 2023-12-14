@@ -52,3 +52,14 @@ prodModel
   .catch((err) => {
     console.log(err);
   });
+
+//2. fetching data ,using find method
+prodModel
+  .find()
+  .then((data) => {
+    console.log(data);
+    console.log("data fetched succesfully");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
