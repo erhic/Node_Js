@@ -57,10 +57,20 @@ let product = {
 prodModel
   .find({ name: "Milk" })
   .sort({ quantity: -1 })
-  .limit(2)
+  .limit(1)
   .then((data) => {
     console.log(data);
     console.log("data fetched succesfully");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+prodModel
+  .deleteOne({ name: "hone" })
+  .then((data) => {
+    console.log(data);
+    console.log("Record deleted successfully");
   })
   .catch((err) => {
     console.log(err);
