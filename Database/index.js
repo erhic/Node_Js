@@ -12,22 +12,25 @@ mongoose
 
 // creating the schema , the structure of data to insert to the collection (table as in sql)
 
-const prodSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Name is mandatory"],
-    minLength: [3, "Minimum length is 3"],
+const prodSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Name is mandatory"],
+      minLength: [3, "Minimum length is 3"],
+    },
+    quantity: {
+      type: Number,
+      required: [true, "Quantity is mandatory"],
+      min: [3, "Minimum value is 3"],
+    },
+    category: {
+      type: [String],
+      enum: ["fruit", "dairy"],
+    },
   },
-  quantity: {
-    type: Number,
-    required: [true, "Quantity is mandatory"],
-    min: [3, "Minimum value is 3"],
-  },
-  category: {
-    type: [String],
-    enum: ["fruit", "dairy"],
-  },
-});
+  { timestamps: true }
+);
 
 // creating a model , an object that gives functionality to work on the collection. This program can't work directly on the collection hence model. it keeps connection between collection and schema
 
@@ -37,21 +40,21 @@ const prodModel = mongoose.model("products", prodSchema);
 
 //dummy objects
 let product = {
-  name: "honey",
+  name: "ice",
   quantity: 4,
   category: "dairy",
 };
 
 //1. inserting objects , use model
-// prodModel
-//   .create(product)
-//   .then((data) => {
-//     console.log(data);
-//     console.log("Data inserted succesfully");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+prodModel
+  .create(product)
+  .then((data) => {
+    console.log(data);
+    console.log("Data inserted succesfully");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 //2. fetching data ,using find method
 // prodModel
