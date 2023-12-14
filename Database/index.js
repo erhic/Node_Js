@@ -37,25 +37,27 @@ const prodModel = mongoose.model("products", prodSchema);
 
 //dummy objects
 let product = {
-  name: "Milk",
-  quantity: 3,
+  name: "honey",
+  quantity: 4,
   category: "dairy",
 };
 
 //1. inserting objects , use model
-prodModel
-  .create(product)
-  .then((data) => {
-    console.log(data);
-    console.log("Data inserted succesfully");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// prodModel
+//   .create(product)
+//   .then((data) => {
+//     console.log(data);
+//     console.log("Data inserted succesfully");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 //2. fetching data ,using find method
 prodModel
-  .find()
+  .find({ name: "Milk" })
+  .sort({ quantity: -1 })
+  .limit(2)
   .then((data) => {
     console.log(data);
     console.log("data fetched succesfully");
