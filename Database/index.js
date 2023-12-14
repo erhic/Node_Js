@@ -46,15 +46,15 @@ let product = {
 };
 
 //1. inserting objects , use model
-prodModel
-  .create(product)
-  .then((data) => {
-    console.log(data);
-    console.log("Data inserted succesfully");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// prodModel
+//   .create(product)
+//   .then((data) => {
+//     console.log(data);
+//     console.log("Data inserted succesfully");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 //2. fetching data ,using find method
 // prodModel
@@ -81,7 +81,7 @@ prodModel
 
 //updating a  resource , can update one or many
 prodModel
-  .updateMany({ name: "yought" }, { quantity: 40 })
+  .updateMany({ name: "ice" }, { quantity: 70 })
   .then((info) => {
     console.log(info);
   })
