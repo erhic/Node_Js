@@ -31,6 +31,7 @@ http
     //reading file synchronously
     let myProducts = fs.readFileSync("./product.json", "utf-8");
 
+    //////////////////////////////////////////////////////////////////////////////
     //fetching all the products
     if (
       urlParam.pathname == "/products" &&
@@ -39,7 +40,10 @@ http
     ) {
       console.log(typeof myProducts);
       res.end(myProducts);
-    } else if (
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////
+    else if (
       //fetching a single product ,using query parameter
       urlParam.pathname == "/products" &&
       req.method == "GET" &&
@@ -59,6 +63,7 @@ http
         res.end(JSON.stringify({ message: "Product not found" }));
       }
 
+      ///////////////////////////////////////////////////////////////////////////////
       //adding a product
     } else if (urlParam.pathname == "/products" && req.method == "POST") {
       console.log(req.method);
@@ -90,6 +95,7 @@ http
       });
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
     //delete a file
     else if (req.method == "DELETE" && urlParam.pathname == "/products") {
       //changing string files in an array
@@ -116,6 +122,8 @@ http
         res.end(JSON.stringify({ message: "Product to delete not found" }));
       }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////
     //updating data
     else if ((req.method == "PUT", urlParam.pathname == "/products")) {
       let prod = "";
