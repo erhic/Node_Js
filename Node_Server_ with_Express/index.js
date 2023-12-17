@@ -1,11 +1,14 @@
 // Imported express library
 const express = require("express");
 const { Schema, default: mongoose } = require("mongoose");
+
 // Creating an object of the instance
 const app = express();
+
 // Creating a middleware to handle data .transforn our stream  data collected from chunks to json
 const mdware = express.json();
 app.use(mdware);
+
 // Creating a connection to the database
 mongoose
   .connect("mongodb://localhost:27017/store")
@@ -44,18 +47,18 @@ const proModel = mongoose.model("products", prodSchema);
 
 //Creating routes to get data, takes first argument as the route and additionally call back functions.
 app.get("/products", (req, res) => {
-  // console.log(req.body);
-  // res.send({ message: "Getting all products successful" });
   proModel
     .find()
     .limit(2)
     .then((products) => {
       console.log(products);
+      res.send({ message: "Getting all products successful" });
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
 //Creating routes to get data for single item
 app.get("/product/:id/", (req, res) => {
   console.log(req.body);
@@ -70,6 +73,7 @@ app.get("/product/:id/", (req, res) => {
       console.log(err);
     });
 });
+
 // Creating a route to post or add resoources
 app.post("/product", (req, res) => {
   let productToAdd = req.body;
@@ -85,6 +89,7 @@ app.post("/product", (req, res) => {
       console.log(err);
     });
 });
+
 // Creating an endpoint to update resources
 app.put("/product/:id", (req, res) => {
   let product = req.body;
@@ -99,10 +104,12 @@ app.put("/product/:id", (req, res) => {
       console.log(err);
     });
 });
+
 // Creatinng an endpoint to delete resources
 app.delete("/product/:id", (req, res) => {
-  let product = req.body.params;
-  res.send({ message: "producted deleted" });
+  proModel.deleteOne({ _id: req.params.id }).then((info) => {
+    res.send({ message: "Product deleted successfullly" });
+  });
 });
 
 //Creating Node server using express
