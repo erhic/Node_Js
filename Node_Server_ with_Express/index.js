@@ -13,3 +13,5 @@ app.get("/product:id/", () => {});
 app.post("/product", () => {});
 // Creating an endpoint to update resources
 app.put("/product", () => {});
+// Creatinng an endpoint to delete resources
+app.delete("/product", () => {});
