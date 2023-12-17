@@ -54,7 +54,11 @@ app.get("/product/:id/", (req, res) => {
   res.send({ message: "Single product retrieved successfuly" });
 });
 // Creating a route to post or add resoources
-app.post("/product", () => {});
+app.post("/product", (req, res) => {
+  let productToAdd = req.body;
+  console.log(req.body);
+  res.send({ message: "Added item successfuly" });
+});
 // Creating an endpoint to update resources
 app.put("/product", () => {});
 // Creatinng an endpoint to delete resources
