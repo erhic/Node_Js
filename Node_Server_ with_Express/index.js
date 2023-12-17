@@ -48,7 +48,11 @@ app.get("/products", (req, res) => {
   res.send({ message: "Getting all products successful" });
 });
 //Creating routes to get data for single item
-app.get("/product:id/", () => {});
+app.get("/product/:id/", (req, res) => {
+  let product = req.params.id;
+  console.log(product);
+  res.send({ message: "Single product retrieved successfuly" });
+});
 // Creating a route to post or add resoources
 app.post("/product", () => {});
 // Creating an endpoint to update resources
