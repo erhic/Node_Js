@@ -1,6 +1,6 @@
 // Imported express library
 const express = require("express");
-const { Schema } = require("mongoose");
+const { Schema, default: mongoose } = require("mongoose");
 // Creating an object of the instance
 const app = express();
 // Creating a middleware to handle data .transforn our stream  data collected from chunks to json
@@ -27,6 +27,10 @@ const prodSchema = Schema(
   },
   { timestamp: true }
 );
+
+// Creating a model , to enable communication between database and schema data from our node server,
+// takes the database working with and the schema as arguments
+const proModel = mongoose.model("store", prodSchema);
 
 //Creating routes to get data, takes first argument as the route and additionally call back functions.
 app.get("/products", () => {});
