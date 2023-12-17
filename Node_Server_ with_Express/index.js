@@ -4,3 +4,9 @@ const express = require("express");
 const app = express();
 // creating a middleware to handle data .transforn our stream  data collected from chunks to json
 const mdware = express.json();
+
+//creating routes to get data, takes first argument as the route and additionally call back functions.
+app.get("/products", () => {});
+//creating routes to get data for single item
+app.get("/product:id/", () => {});
+//
