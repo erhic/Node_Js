@@ -1,13 +1,36 @@
-// imported express library
+// Imported express library
 const express = require("express");
+const { Schema } = require("mongoose");
 // Creating an object of the instance
 const app = express();
-// creating a middleware to handle data .transforn our stream  data collected from chunks to json
+// Creating a middleware to handle data .transforn our stream  data collected from chunks to json
 const mdware = express.json();
 
-//creating routes to get data, takes first argument as the route and additionally call back functions.
+//Creating Schema , construct of data to be sent to the database
+const prodSchema = Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Name is mandatory"],
+    },
+    color: {
+      type: String,
+    },
+    quantity: {
+      type: Number,
+      min: [1, "Quantity must be more than 1"],
+    },
+    category: {
+      type: String,
+      enum: ["Food", "Clothing", "Stationery"],
+    },
+  },
+  { timestamp: true }
+);
+
+//Creating routes to get data, takes first argument as the route and additionally call back functions.
 app.get("/products", () => {});
-//creating routes to get data for single item
+//Creating routes to get data for single item
 app.get("/product:id/", () => {});
 // Creating a route to post or add resoources
 app.post("/product", () => {});
