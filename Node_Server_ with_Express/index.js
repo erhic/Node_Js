@@ -56,8 +56,17 @@ app.get("/product/:id/", (req, res) => {
 // Creating a route to post or add resoources
 app.post("/product", (req, res) => {
   let productToAdd = req.body;
-  console.log(req.body);
-  res.send({ message: "Added item successfuly" });
+  // console.log(req.body);
+  // res.send({ message: "Added item successfuly" });
+  proModel
+    .create(productToAdd)
+    .then((stream) => {
+      console.log("item added successfully");
+      res.send({ data: stream, message: "Product added successfully" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 // Creating an endpoint to update resources
 app.put("/product/:id", (req, res) => {
