@@ -35,12 +35,12 @@ const prodSchema = Schema(
       enum: ["Food", "Clothing", "Stationery"],
     },
   },
-  { timestamp: true }
+  { timestamps: true }
 );
 
 // Creating a model , to enable communication between database and schema data from our node server,
-// takes the database working with and the schema as arguments
-const proModel = mongoose.model("store", prodSchema);
+// takes the collection working on in database and the schema as arguments
+const proModel = mongoose.model("products", prodSchema);
 
 //Creating routes to get data, takes first argument as the route and additionally call back functions.
 app.get("/products", (req, res) => {
