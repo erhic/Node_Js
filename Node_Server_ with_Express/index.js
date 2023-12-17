@@ -9,4 +9,5 @@ const mdware = express.json();
 app.get("/products", () => {});
 //creating routes to get data for single item
 app.get("/product:id/", () => {});
-//
+// Creating a route to post or add resoources
+app.post("/product", () => {});
