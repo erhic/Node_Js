@@ -11,3 +11,5 @@ app.get("/products", () => {});
 app.get("/product:id/", () => {});
 // Creating a route to post or add resoources
 app.post("/product", () => {});
+// Creating an endpoint to update resources
+app.put("/product", () => {});
