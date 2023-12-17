@@ -43,7 +43,10 @@ const prodSchema = Schema(
 const proModel = mongoose.model("store", prodSchema);
 
 //Creating routes to get data, takes first argument as the route and additionally call back functions.
-app.get("/products", () => {});
+app.get("/products", (req, res) => {
+  console.log(req.body);
+  res.send({ message: "Getting all products successful" });
+});
 //Creating routes to get data for single item
 app.get("/product:id/", () => {});
 // Creating a route to post or add resoources
@@ -56,5 +59,5 @@ app.delete("/product", () => {});
 //Creating Node server using express
 let urlPort = 8000;
 app.listen(urlPort, () => {
-  console.log(`___ Server connected successfully on port :${urlPort}___`);
+  console.log(`__:::: Server connected successfully on port :${urlPort}___`);
 });
