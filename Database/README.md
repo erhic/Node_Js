@@ -19,7 +19,7 @@ Steps to follow
 3. Install mongoose package in the working directory of your project.
 4. Connect to database , using the connect function (asynchronous,return a promise, that we can use to return a callback to tell whether connnection is succcessful)
 
-   -- Note: while working with the local database ,path the url ,port with the database you are working on.
+   -- Note: while working with the local database , Add path the url ,port with the database you are working on.
 
 5. Create a schema , a structure like object showing the properies and other validations values that the database should expect to store. Use the schema function provide by mongoose.
 

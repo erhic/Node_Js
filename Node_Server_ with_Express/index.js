@@ -42,3 +42,9 @@ app.post("/product", () => {});
 app.put("/product", () => {});
 // Creatinng an endpoint to delete resources
 app.delete("/product", () => {});
+
+//Creating Node server using express
+let urlPort = 8000;
+app.listen(urlPort, () => {
+  console.log(`Server connected successfully on port :${urlPort}`);
+});
