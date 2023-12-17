@@ -44,8 +44,8 @@ const proModel = mongoose.model("products", prodSchema);
 
 //Creating routes to get data, takes first argument as the route and additionally call back functions.
 app.get("/products", (req, res) => {
-  console.log(req.body);
-  res.send({ message: "Getting all products successful" });
+  // console.log(req.body);
+  // res.send({ message: "Getting all products successful" });
   proModel
     .find()
     .limit(2)
@@ -58,9 +58,17 @@ app.get("/products", (req, res) => {
 });
 //Creating routes to get data for single item
 app.get("/product/:id/", (req, res) => {
-  let product = req.params.id;
-  console.log(product);
+  console.log(req.body);
   res.send({ message: "Single product retrieved successfuly" });
+
+  proModel
+    .findOne(req.body)
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 // Creating a route to post or add resoources
 app.post("/product", (req, res) => {
@@ -79,8 +87,17 @@ app.post("/product", (req, res) => {
 });
 // Creating an endpoint to update resources
 app.put("/product/:id", (req, res) => {
-  let product = req.body.params;
-  res.send({ message: "Product updated" });
+  let product = req.body;
+
+  proModel
+    .updateOne({ _id: req.params.id }, product)
+    .then((data) => {
+      console.log("updated products");
+      res.send({ message: "Product updated" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 // Creatinng an endpoint to delete resources
 app.delete("/product/:id", (req, res) => {
