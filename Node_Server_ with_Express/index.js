@@ -46,6 +46,15 @@ const proModel = mongoose.model("products", prodSchema);
 app.get("/products", (req, res) => {
   console.log(req.body);
   res.send({ message: "Getting all products successful" });
+  proModel
+    .find()
+    .limit(2)
+    .then((products) => {
+      console.log(products);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 //Creating routes to get data for single item
 app.get("/product/:id/", (req, res) => {
