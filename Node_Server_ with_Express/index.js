@@ -60,9 +60,15 @@ app.post("/product", (req, res) => {
   res.send({ message: "Added item successfuly" });
 });
 // Creating an endpoint to update resources
-app.put("/product", () => {});
+app.put("/product/:id", (req, res) => {
+  let product = req.body.params;
+  res.send({ message: "Product updated" });
+});
 // Creatinng an endpoint to delete resources
-app.delete("/product", () => {});
+app.delete("/product/:id", (req, res) => {
+  let product = req.body.params;
+  res.send({ message: "producted deleted" });
+});
 
 //Creating Node server using express
 let urlPort = 8000;
