@@ -5,7 +5,7 @@ const { Schema, default: mongoose } = require("mongoose");
 const app = express();
 // Creating a middleware to handle data .transforn our stream  data collected from chunks to json
 const mdware = express.json();
-
+app.use(mdware);
 // Creating a connection to the database
 mongoose
   .connect("mongodb://localhost:27017/store")
