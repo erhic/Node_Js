@@ -6,6 +6,16 @@ const app = express();
 // Creating a middleware to handle data .transforn our stream  data collected from chunks to json
 const mdware = express.json();
 
+// Creating a connection to the database
+mongoose
+  .connect("mongodb://localhost:27017/store")
+  .then(() => {
+    console.log(" ___ Connection to Mongodb Successful ___");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 //Creating Schema , construct of data to be sent to the database
 const prodSchema = Schema(
   {
@@ -46,5 +56,5 @@ app.delete("/product", () => {});
 //Creating Node server using express
 let urlPort = 8000;
 app.listen(urlPort, () => {
-  console.log(`Server connected successfully on port :${urlPort}`);
+  console.log(`___ Server connected successfully on port :${urlPort}___`);
 });
