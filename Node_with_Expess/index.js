@@ -74,6 +74,18 @@ app.post("/login", (req, res) => {
   // res.send({ message: "logged in !!" });
   // console.log(req.body);
   let userCredentials = req.body;
+  userModel
+    .findOne({ email: userCredentials.email })
+    .then((usr) => {
+      if (usr !== null) {
+      } else {
+        res.send({ message: "wrong email" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send({ message: "Some problem happened" });
+    });
 });
 //Setting up a middleware
 //app server
