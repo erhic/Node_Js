@@ -22,21 +22,24 @@ mongoose
   });
 
 //Schema
-const userShema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minLength: [3, "Should have more than 2 characters"],
+const userShema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minLength: [3, "Should have more than 2 characters"],
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 //Model
 const userModel = mongoose.model("users", userShema);
 
@@ -45,7 +48,7 @@ const userModel = mongoose.model("users", userShema);
 app.post("/register", (req, res) => {
   let user = req.body;
 
-  //hashing pasword
+  //hashing password
   bcrypt.genSalt(10, (err, salt) => {
     if (!err) {
       bcrypt.hash(user.password, salt, (err, hspass) => {
@@ -65,6 +68,14 @@ app.post("/register", (req, res) => {
     }
   });
 });
+
+//Setting up login route -uses post method, we dont want to reveal user details in url
+app.post("/login", (req, res) => {
+  // res.send({ message: "logged in !!" });
+  // console.log(req.body);
+  let userCredentials = req.body;
+});
+//Setting up a middleware
 //app server
 app.listen(7000, () => {
   console.log("Server started successfully");
