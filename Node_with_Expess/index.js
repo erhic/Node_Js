@@ -58,10 +58,13 @@ app.post("/register", (req, res) => {
           userModel
             .create(user)
             .then((doc) => {
-              res.send({ message: "User registered successfully!!!!" });
+              res
+                .status(201)
+                .send({ message: "User registered successfully!!!!" });
             })
             .catch((err) => {
               console.log(err);
+              res.status(500).send({ message: "Some problem" });
             });
         }
       });
