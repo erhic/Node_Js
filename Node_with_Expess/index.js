@@ -12,3 +12,6 @@ const mdware = express.json();
 app.use(mdware);
 
 //endpoints
+app.listen(7000, () => {
+  console.log("Server started successfully");
+});
