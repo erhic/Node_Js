@@ -78,6 +78,17 @@ app.post("/login", (req, res) => {
     .findOne({ email: userCredentials.email })
     .then((usr) => {
       if (usr !== null) {
+        bcrypt.compare(
+          userCredentials.password,
+          usr.password,
+          (err, results) => {
+            if (results === true) {
+              res.send({ message: "Login successful" });
+            } else {
+              res.send({ message: "Wrong password" });
+            }
+          }
+        );
       } else {
         res.send({ message: "wrong email" });
       }
