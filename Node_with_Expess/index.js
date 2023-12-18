@@ -11,7 +11,28 @@ const app = express();
 const mdware = express.json();
 app.use(mdware);
 
+//Schema
+const userShema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minLength: [3, "Should have more than 2 characters"],
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
+//Model
+
 //endpoints
+//Registering a user
+
+//app server
 app.listen(7000, () => {
   console.log("Server started successfully");
 });
