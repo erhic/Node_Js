@@ -28,6 +28,7 @@ const userShema = mongoose.Schema({
   },
 });
 //Model
+const userModel = mongoose.Model("users", userShema);
 
 //endpoints
 //Registering a user
