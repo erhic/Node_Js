@@ -11,6 +11,16 @@ const app = express();
 const mdware = express.json();
 app.use(mdware);
 
+// Database connecton
+mongoose
+  .connect("mongodb:/localhost:27017/ecommerce")
+  .then(() => {
+    console.log("Database Connected!");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 //Schema
 const userShema = mongoose.Schema({
   name: {
