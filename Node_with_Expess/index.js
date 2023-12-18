@@ -83,7 +83,20 @@ app.post("/login", (req, res) => {
           usr.password,
           (err, results) => {
             if (results === true) {
-              res.send({ message: "Login successful" });
+              // res.send({ message: "Login successful" });
+
+              //generate a token
+              jwt.sign(
+                { email: userCredentials.email },
+                "Eritech",
+                (err, token) => {
+                  if (!err) {
+                    res.send({ token: token });
+                  } else {
+                    res.send({ message: "Problem generating a token" });
+                  }
+                }
+              );
             } else {
               res.send({ message: "Wrong password" });
             }
