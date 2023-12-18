@@ -13,7 +13,7 @@ app.use(mdware);
 
 // Database connecton
 mongoose
-  .connect("mongodb:/localhost:27017/ecommerce")
+  .connect("mongodb://localhost:27017/ecommerce")
   .then(() => {
     console.log("Database Connected!");
   })
@@ -38,11 +38,33 @@ const userShema = mongoose.Schema({
   },
 });
 //Model
-const userModel = mongoose.Model("users", userShema);
+const userModel = mongoose.model("users", userShema);
 
 //endpoints
 //Registering a user
+app.post("/register", (req, res) => {
+  let user = req.body;
 
+  //hashing pasword
+  bcrypt.genSalt(10, (err, salt) => {
+    if (!err) {
+      bcrypt.hash(user.password, salt, (err, hspass) => {
+        if (!err) {
+          console.log(hspass);
+          user.password = hspass;
+          userModel
+            .create(user)
+            .then((doc) => {
+              res.send({ message: "User registered successfully!!!!" });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+    }
+  });
+});
 //app server
 app.listen(7000, () => {
   console.log("Server started successfully");
