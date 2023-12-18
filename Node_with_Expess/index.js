@@ -101,12 +101,12 @@ app.post("/login", (req, res) => {
                 }
               );
             } else {
-              res.send({ message: "Wrong password" });
+              res.status(401).send({ message: "Wrong password" });
             }
           }
         );
       } else {
-        res.send({ message: "wrong email" });
+        res.status(404).send({ message: "wrong email ,no user found" });
       }
     })
     .catch((err) => {
