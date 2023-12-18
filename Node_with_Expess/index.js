@@ -112,6 +112,22 @@ app.post("/login", (req, res) => {
     });
 });
 //Setting up a middleware
+function validateToken(req, res, next) {
+  let gntoken = req.headers.authorization.split(" ")[1];
+  jwt.verify(gntoken, "Eritech", (err, data) => {
+    if (!err) {
+      console.log(data);
+      next();
+    } else {
+      res.send({ message: "invalid token ,please login again" });
+    }
+  });
+}
+
+// securing endpoint with middleware
+app.get("/users", validateToken, (req, res) => {
+  res.send({ message: "user are available now" });
+});
 //app server
 app.listen(7000, () => {
   console.log("Server started successfully");
