@@ -111,7 +111,7 @@ app.post("/login", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.send({ message: "Some problem happened" });
+      res.status(500).send({ message: "Some problem happened" });
     });
 });
 //Setting up a middleware
