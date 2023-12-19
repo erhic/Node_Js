@@ -24,6 +24,9 @@ const userSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+//model
+const userModel = mongoose.model("accounts", userSchema);
+
 app.listen(6000, () => {
   console.log("server running");
 });
