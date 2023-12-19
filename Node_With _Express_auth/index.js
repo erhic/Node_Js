@@ -70,7 +70,19 @@ app.post("/login", (req, res) => {
           userFrmDB.password,
           (err, result) => {
             if (result === true) {
-              res.status(200).send({ message: " login successful" });
+              // res.status(200).send({ message: " login successful" });
+              //generating a token
+              jwt.sign(
+                { email: userReqDetails.email },
+                "Techproj",
+                (err, token) => {
+                  if (!err) {
+                    res.send({ token: token });
+                  } else {
+                    res.send({ message: "Please try login again" });
+                  }
+                }
+              );
             } else {
               res.status(404).send({ message: "Invalid password" });
             }
@@ -84,9 +96,20 @@ app.post("/login", (req, res) => {
       res.send({ message: "Error happened" });
     });
 });
-app.get("/products", (req, res) => {
+
+function verifyToken(req, res, next) {
+  let gtoken = req.headers.authorization.split(" ")[1];
+  jwt.verify(gtoken, "Techproj", (err, data) => {
+    console.log(data);
+    next();
+  });
+}
+
+app.get("/products", verifyToken, (req, res) => {
   console.log("product are here");
+  res.send({ message: "produucts accessible" });
 });
+
 ///app-server
 app.listen(6000, () => {
   console.log("server running");
