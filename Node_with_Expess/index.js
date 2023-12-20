@@ -114,6 +114,7 @@ app.post("/login", (req, res) => {
       res.status(500).send({ message: "Some problem happened" });
     });
 });
+
 //Setting up a middleware
 function validateToken(req, res, next) {
   let gntoken = req.headers.authorization.split(" ")[1];
